@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'docker/dockerfile-node'
+            additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+        }
+    }
+
+    stages {
+        stage('Test - web-components') {
+	    parallel{
+		stage('emobility-display'){
+                    steps {
+			sh 'test -d mobility-echarging-display'
+                        sh 'test -e mobility-echarging-display/README.md'
+			sh 'cd mobility-echarging-display && npm test'
+                    }
+                }
+            }
+        }
+    }
+}
