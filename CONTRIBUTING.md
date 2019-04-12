@@ -8,7 +8,7 @@ We expect you to use **npm** as package management tool, so that we can create g
 ## Continuous integration
 for each web component we need automatic checks if the minimum requirements are met and will therefore do some basic checks like if the folder you pushed is empty, or if there are no javascript files. Furthermore we will try to run your tests with npm.
 ## Naming
- Work in one single root-folder which should follow this naming convention:`odh-[topic]-[functionality]` e.g.: *odh-emobility-echarging-display*. Also only use lowercase character divided by `-`.
+ Work in one single root-folder which should follow this naming convention:`[category]-[topic]-[functionality]` e.g.: *mobility-echarging-display*. Also only use lowercase character divided by `-`.
+ 
 
-For more informations write to info@opendatahub.bz.it
-
+For more information write to info@opendatahub.bz.it
