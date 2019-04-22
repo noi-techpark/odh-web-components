@@ -1,7 +1,7 @@
 # odh-web-components
-Common repository for all web-components created in line with the opendatahub project.
+Common repository for web-components created in the opendatahub project.
 
-All contributions need to made through pull requests of forked repositories. Only opendatahub-core member will have write permissions for this repositories and will be the once to review contributions and check if guidelines are in line.
+To contribute to this repository you have to fork it and to make pull requests. Only Open Data Hub Core Members have write permissions. They will review all contributions and verify if all code is in line with the Open Data Hub Guidelines.
 
 How to **contribute**:
 
