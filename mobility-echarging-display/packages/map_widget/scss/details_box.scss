@@ -1,0 +1,240 @@
+@import 'colors';
+@import './icons.scss';
+
+.details_box {
+  @media only screen and (min-width: 320px) {
+    background-color: $white;
+    height: 100%;
+    width: 100%;
+    margin-top: 4px;
+    position: relative;
+  }
+  @media only screen and (min-width: 678px) {
+    height: 100%;
+  }
+}
+
+.details_box.filter_box {
+  height: 100%;
+}
+
+.details_box__body {
+  overflow-y: scroll;
+  height: calc(100% - 60px);
+}
+
+$scrollbar-white: #f5f5f5;
+.details_box__body::-webkit-scrollbar-track {
+  background-color: $scrollbar-white;
+}
+
+.details_box__body::-webkit-scrollbar {
+  background-color: $scrollbar-white;
+}
+
+.details_box__body::-webkit-scrollbar-thumb {
+  background-color: $black-200;
+}
+
+.details_box__header {
+  @media only screen and (min-width: 320px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.07);
+    padding: 0 16px;
+    background-color: $white;
+  }
+  @media only screen and (min-width: 678px) {
+    height: 56px;
+  }
+}
+
+@media only screen and (min-width: 320px) {
+  .details_box__close_button {
+    margin-left: auto;
+    height: 16px;
+    cursor: pointer;
+  }
+  .details_box__close_button img {
+    width: 12px;
+  }
+  .details_box__body::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+
+@media only screen and (min-width: 678px) {
+  .details_box__close_button img {
+    width: 16px;
+  }
+  .details_box__body::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+.details_box__status_label {
+  border-radius: 4px;
+  height: 24px;
+  padding: 0 8px;
+  padding-top: 1px;
+}
+
+.details_box__status_label:not(:first-child) {
+  margin-left: 8px;
+}
+
+.details_box__status_label p {
+  font-size: 12px;
+  margin: 0;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.details_box__status_label.green {
+  background-color: #e8f3ca;
+}
+.details_box__status_label.green p {
+  color: $green;
+}
+
+.details_box__status_label.purple {
+  background-color: #fde6ff;
+}
+.details_box__status_label.purple p {
+  color: #ef80ff;
+}
+
+.details_box__status_label.orange {
+  background-color: #fde1c9;
+}
+.details_box__status_label.orange p {
+  color: $orange;
+}
+
+.details_box__status_label.red {
+  background-color: #ffcacd;
+}
+.details_box__status_label.red p {
+  color: $red;
+}
+
+.details_box__status_label.gray {
+  background-color: #eaeaea;
+}
+.details_box__status_label.gray p {
+  color: $black-300;
+}
+
+.details_box__section {
+  border-bottom: 2px solid $black-50;
+}
+
+.details_box__section:last-of-type {
+  border-bottom: 0;
+}
+
+.element_background {
+  background-color: $black-10;
+  border-radius: 4px;
+}
+
+.custom-checkbox label {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox .custom-checkbox-checkbox {
+  background-color: $white;
+  border: 2px solid $black-400;
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.custom-checkbox input:checked + .custom-checkbox-checkbox {
+  background-color: $green;
+  border: 2px solid $green;
+  content: url($tick_icon_64);
+}
+
+.custom-checkbox input {
+  display: none;
+}
+
+.filter_box__footer {
+  height: 56px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid $black-50;
+  background-color: $white;
+}
+
+.filter_box_footer__button {
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  height: 40px;
+  padding: 0 16px;
+}
+.filter_box_footer__button:focus {
+  outline: none;
+}
+.filter_box_footer__button.secondary {
+  background-color: $black-50;
+  color: $black-400;
+}
+.filter_box_footer__button.primary {
+  background-color: $green;
+  color: $white;
+}
+
+.modal__star_ratings {
+  background-color: rgba(51, 51, 51, 0.32);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1100;
+}
+
+.modal__star_ratings .modal_content {
+  background-color: $white;
+  width: 90vw;
+  height: 489px;
+  position: absolute;
+  margin-left: -45vw;
+  left: 50%;
+  top: 5vh;
+  box-shadow: 0 16px 32px 0 rgba(51, 51, 51, 0.24), 0 2px 4px 0 rgba(51, 51, 51, 0.24);
+}
+
+@media only screen and (min-width: 678px) {
+  .modal__star_ratings .modal_content {
+    width: 524px;
+    height: 489px;
+    margin-left: -262px;
+  }
+}
+
+.modal__star_ratings .modal_header {
+  border-bottom: 2px solid $black-50;
+}
+
+.modal__star_ratings .modal_footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal__star_ratings__image_to_upload {
+  background-color: #f6f6f6;
+}
