@@ -80,7 +80,8 @@ export function render__filter_box() {
       ...this.filters,
       radius: 0,
       access_type: [],
-      plug_type: []
+      plug_type: [],
+      provider: []
     };
     let all_checkbox = this.shadowRoot.querySelectorAll('.filter_box input[type="checkbox"]');
     for (let i = 0; i < all_checkbox.length; i++) {
