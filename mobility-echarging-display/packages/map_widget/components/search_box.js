@@ -74,6 +74,12 @@ export function render__search_box() {
     `;
   };
 
+  const { radius, access_type, plug_type, state, provider } = this.filters;
+  //     radius: 0,
+  // access_type: [],
+  // plug_type: [],
+  // state: [],
+  // provider: []
   return html`
     <style>
       ${getStyle(style)}
@@ -93,6 +99,11 @@ export function render__search_box() {
         <div style="height: 24px; width: 1px; background-color: rgba(136, 137, 139, 0.24);"></div>
       </div>
       <div @click="${() => this.handleToggleShowFilters()}" class="utils--cursor-pointer">
+        ${radius > 0 || access_type.length || plug_type.length || plug_type.length || state.length || provider.length
+          ? html`
+              <div class="search_box__filter_badge"></div>
+            `
+          : null}
         <img class="w-18px ml-3 mr-3" src="${this.showFilters ? icon_x_grey : icon_filter}" alt="" />
       </div>
       ${this.searched_places.length ? render__places_list() : null}
