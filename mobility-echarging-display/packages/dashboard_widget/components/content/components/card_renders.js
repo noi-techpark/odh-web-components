@@ -50,11 +50,11 @@ export const render_plug_types = () => {
         </div>
       </div>
       <div class="plug_list_names">
-        <div class="plug_list_names__name type2_mannekes">Type 2 - MANNEKES</div>
-        <div class="plug_list_names__name type2_230vac">Type 2 - 230Vac</div>
-        <div class="plug_list_names__name type2_400vac">Type 2 - 400Vac</div>
-        <div class="plug_list_names__name type3a">Type 3A</div>
-        <div class="plug_list_names__name chademo">CHAdeMO</div>
+        <div id="Type2Mennekes" class="plug_list_names__name type2_mannekes">Type 2 - MANNEKES</div>
+        <div id="Type2-230Vac" class="plug_list_names__name type2_230vac">Type 2 - 230Vac</div>
+        <div id="Type2-400Vac" class="plug_list_names__name type2_400vac">Type 2 - 400Vac</div>
+        <div id="Type3A" class="plug_list_names__name type3a">Type 3A</div>
+        <div id="CHAdeMO" class="plug_list_names__name chademo">CHAdeMO</div>
       </div>
     </div>
   `;

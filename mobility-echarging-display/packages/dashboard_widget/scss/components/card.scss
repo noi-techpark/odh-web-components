@@ -214,9 +214,9 @@ $card-height: 304px;
         color: #e6040e;
         background-color: #ffcacd;
       }
-      &.active {
-        background-color: transparentize($color: $orange, $amount: 0.5);
-        color: $orange;
+      &.disabled {
+        background-color: $black-100;
+        color: $black-300;
       }
     }
   }
