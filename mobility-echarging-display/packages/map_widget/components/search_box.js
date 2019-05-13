@@ -9,18 +9,16 @@ import icon_x_grey from '../icons/grey/icon_x_grey.png';
 import { t } from '../translations';
 
 export function render__search_box() {
-  /**
-   * TODO: richiesta posti
-   */
   const handle_onchange = e => {
     if (e.target.value) {
-      cose(e.target.value);
+      debounced_request(e.target.value);
+      this.showFilters = false;
     } else {
       this.searched_places = [];
     }
   };
 
-  const cose = debounce(500, this.request__get_coordinates_from_search);
+  const debounced_request = debounce(500, this.request__get_coordinates_from_search);
 
   const manage_map = (lat, lng) => {
     lat = parseFloat(lat);
@@ -75,11 +73,7 @@ export function render__search_box() {
   };
 
   const { radius, access_type, plug_type, state, provider } = this.filters;
-  //     radius: 0,
-  // access_type: [],
-  // plug_type: [],
-  // state: [],
-  // provider: []
+
   return html`
     <style>
       ${getStyle(style)}

@@ -285,6 +285,9 @@ class EMobilityMap extends LitElement {
   }
 
   handleToggleShowFilters() {
+    if (this.searched_places.length && !this.showFilters) {
+      this.searched_places = [];
+    }
     this.showFilters = !this.showFilters;
   }
 
