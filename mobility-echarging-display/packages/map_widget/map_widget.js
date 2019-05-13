@@ -4,7 +4,6 @@ import { html, LitElement } from 'lit-element';
 import {
   request__get_plug_details,
   request__get_stations_details,
-  // request__get_stations_ids,
   request__get_stations_plugs_details
 } from './api/integreen-life.js';
 import { request__get_coordinates_from_search } from './api/nominatim';
@@ -72,7 +71,6 @@ class EMobilityMap extends LitElement {
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
     /* Requests */
-    // this.request__get_stations_ids = request__get_stations_ids.bind(this);
     this.request__get_stations_details = request__get_stations_details.bind(this);
     this.request__get_stations_plugs_details = request__get_stations_plugs_details.bind(this);
     this.request__get_coordinates_from_search = request__get_coordinates_from_search.bind(this);
