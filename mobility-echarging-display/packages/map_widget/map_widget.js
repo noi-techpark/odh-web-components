@@ -30,6 +30,7 @@ import { getLatLongFromStationDetail, getStyle, stationStatusMapper, _toggleFull
 import { request__near_restaurants, request__near_accomodations } from './api/odh.js';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import leaflet_mrkcls from 'leaflet.markercluster';
+import { get_provider_list } from './utils/get_provider_list.js';
 
 class EMobilityMap extends LitElement {
   constructor() {
@@ -46,7 +47,8 @@ class EMobilityMap extends LitElement {
       radius: 0,
       access_type: [],
       plug_type: [],
-      state: []
+      state: [],
+      provider: []
     };
     this.visibleStations = 0;
     this.searched_places = [];
@@ -61,6 +63,7 @@ class EMobilityMap extends LitElement {
     this.isFullScreen = false;
     this.station_near_restaurants = [];
     this.station_near_accomodations = [];
+    this.provider_list = [];
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);
@@ -126,6 +129,7 @@ class EMobilityMap extends LitElement {
 
     await this.request__get_stations_details();
     await this.request__get_stations_plugs_details();
+    this.provider_list = get_provider_list(this.all_stations_details);
 
     /**
      * Render stations markers
@@ -172,6 +176,11 @@ class EMobilityMap extends LitElement {
         });
         return condition;
       });
+      /**
+       * provider
+       */
+      const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+
       const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
       if (this.filters.state.length) {
         /* state TODO: this can disrupt performances */
@@ -184,7 +193,7 @@ class EMobilityMap extends LitElement {
       }
 
       /* Merge conditions */
-      return condition_access_type && Boolean(condition_plug_type);
+      return condition_access_type && condition_provider && Boolean(condition_plug_type);
     });
 
     /* Print filtered stations on map */

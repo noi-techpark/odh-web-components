@@ -299,6 +299,16 @@ export const t = {
     fr: 'PLUG TYPE',
     ru: 'PLUG TYPE'
   },
+  provider: {
+    en: 'PROVIDER',
+    de: 'PROVIDER',
+    it: 'FORNITORE',
+    nl: 'PROVIDER',
+    cs: 'PROVIDER',
+    pl: 'PROVIDER',
+    fr: 'PROVIDER',
+    ru: 'PROVIDER'
+  },
   open_charging_station: {
     en: 'Charging station open',
     de: 'Charging station open',
