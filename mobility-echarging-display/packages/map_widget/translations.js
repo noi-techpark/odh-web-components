@@ -299,6 +299,16 @@ export const t = {
     fr: 'PLUG TYPE',
     ru: 'PLUG TYPE'
   },
+  provider: {
+    en: 'PROVIDER',
+    de: 'PROVIDER',
+    it: 'FORNITORE',
+    nl: 'PROVIDER',
+    cs: 'PROVIDER',
+    pl: 'PROVIDER',
+    fr: 'PROVIDER',
+    ru: 'PROVIDER'
+  },
   open_charging_station: {
     en: 'Charging station open',
     de: 'Charging station open',
@@ -308,5 +318,15 @@ export const t = {
     pl: 'Charging station open',
     fr: 'Charging station open',
     ru: 'Charging station open'
+  },
+  near_places: {
+    en: 'Near places',
+    de: 'Near places',
+    it: 'Nelle vicinanze',
+    nl: 'Near places',
+    cs: 'Near places',
+    pl: 'Near places',
+    fr: 'Near places',
+    ru: 'Near places'
   }
 };

@@ -15,6 +15,7 @@ export const observed_properties = {
   isFullScreen: { type: Boolean },
   station_near_restaurants: { type: Object },
   station_near_accomodations: { type: Object },
+  provider_list: { type: Array },
   // Parameters
   logo: { type: String },
   language: { type: String }

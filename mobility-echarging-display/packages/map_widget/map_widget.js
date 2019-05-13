@@ -4,7 +4,6 @@ import { html, LitElement } from 'lit-element';
 import {
   request__get_plug_details,
   request__get_stations_details,
-  request__get_stations_ids,
   request__get_stations_plugs_details
 } from './api/integreen-life.js';
 import { request__get_coordinates_from_search } from './api/nominatim';
@@ -30,6 +29,7 @@ import { getLatLongFromStationDetail, getStyle, stationStatusMapper, _toggleFull
 import { request__near_restaurants, request__near_accomodations } from './api/odh.js';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import leaflet_mrkcls from 'leaflet.markercluster';
+import { get_provider_list } from './utils/get_provider_list.js';
 
 class EMobilityMap extends LitElement {
   constructor() {
@@ -46,7 +46,8 @@ class EMobilityMap extends LitElement {
       radius: 0,
       access_type: [],
       plug_type: [],
-      state: []
+      state: [],
+      provider: []
     };
     this.visibleStations = 0;
     this.searched_places = [];
@@ -61,6 +62,7 @@ class EMobilityMap extends LitElement {
     this.isFullScreen = false;
     this.station_near_restaurants = [];
     this.station_near_accomodations = [];
+    this.provider_list = [];
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);
@@ -69,7 +71,6 @@ class EMobilityMap extends LitElement {
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
     /* Requests */
-    this.request__get_stations_ids = request__get_stations_ids.bind(this);
     this.request__get_stations_details = request__get_stations_details.bind(this);
     this.request__get_stations_plugs_details = request__get_stations_plugs_details.bind(this);
     this.request__get_coordinates_from_search = request__get_coordinates_from_search.bind(this);
@@ -126,6 +127,7 @@ class EMobilityMap extends LitElement {
 
     await this.request__get_stations_details();
     await this.request__get_stations_plugs_details();
+    this.provider_list = get_provider_list(this.all_stations_details);
 
     /**
      * Render stations markers
@@ -172,6 +174,11 @@ class EMobilityMap extends LitElement {
         });
         return condition;
       });
+      /**
+       * provider
+       */
+      const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+
       const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
       if (this.filters.state.length) {
         /* state TODO: this can disrupt performances */
@@ -184,7 +191,7 @@ class EMobilityMap extends LitElement {
       }
 
       /* Merge conditions */
-      return condition_access_type && Boolean(condition_plug_type);
+      return condition_access_type && condition_provider && Boolean(condition_plug_type);
     });
 
     /* Print filtered stations on map */
@@ -192,8 +199,8 @@ class EMobilityMap extends LitElement {
       const marker_position = getLatLongFromStationDetail(o);
       /** Creating the icon */
       let station_icon = L.icon({
-        iconUrl: stationStatusMapper(o.state),
-        iconSize: o.state !== 'ACTIVE' ? [30, 30] : [36, 36]
+        iconUrl: stationStatusMapper(o.state, o.origin),
+        iconSize: o.state !== 'ACTIVE' && o.state !== 'AVAILABLE' ? [30, 30] : [36, 36]
       });
       let marker = L.marker([marker_position.lat, marker_position.lng], {
         icon: station_icon
@@ -278,6 +285,9 @@ class EMobilityMap extends LitElement {
   }
 
   handleToggleShowFilters() {
+    if (this.searched_places.length && !this.showFilters) {
+      this.searched_places = [];
+    }
     this.showFilters = !this.showFilters;
   }
 

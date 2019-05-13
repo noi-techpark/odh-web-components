@@ -47,6 +47,20 @@ export function render__filter_box() {
     }
   };
 
+  const handle__provider = e => {
+    if (e.target.checked) {
+      this.filters = {
+        ...this.filters,
+        provider: [...this.filters.provider, e.target.value]
+      };
+    } else {
+      this.filters = {
+        ...this.filters,
+        provider: this.filters.provider.filter(o => o !== e.target.value)
+      };
+    }
+  };
+
   const handle__state = e => {
     if (e.target.checked) {
       this.filters = {
@@ -66,7 +80,8 @@ export function render__filter_box() {
       ...this.filters,
       radius: 0,
       access_type: [],
-      plug_type: []
+      plug_type: [],
+      provider: []
     };
     let all_checkbox = this.shadowRoot.querySelectorAll('.filter_box input[type="checkbox"]');
     for (let i = 0; i < all_checkbox.length; i++) {
@@ -154,7 +169,7 @@ export function render__filter_box() {
           </div>
         </div>
         <!-- Detail box -->
-        <div class="details_box__section mt-3 mb-5">
+        <div class="details_box__section mt-3">
           <div class="col-12">
             <p class="fs-14">${t.plug_type[this.language]}</p>
             <!-- "700 bar small vehicles" "UNKNOWN" -->
@@ -215,6 +230,26 @@ export function render__filter_box() {
             </div>
           </div>
         </div>
+        <!-- Detail box -->
+        <div class="details_box__section mt-3 mb-5">
+          <div class="col-12">
+            <p class="fs-14 mb-3">${t.provider[this.language]}</p>
+            ${this.provider_list.map((o, i) => {
+              return html`
+                <div class="custom-checkbox mt-2">
+                  <label htmlFor=${`provider-${i + 1}`} class="fs-16">
+                    <input type="checkbox" id=${`provider-${i + 1}`} value=${o} @change="${e => handle__provider(e)}" />
+                    <span class="custom-checkbox-checkbox mr-2"></span>
+                    ${o}
+                  </label>
+                </div>
+                <hr />
+              `;
+            })}
+          </div>
+        </div>
+        <!-- provider_list -->
+        <!-- End -->
         <!-- Detail box -->
         <!-- <div class="details_box__section mt-3 d-none">
           <div class="col-12">
