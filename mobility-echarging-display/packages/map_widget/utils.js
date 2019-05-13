@@ -2,16 +2,17 @@ import { html } from 'lit-element';
 import icon__green_marker from './icons/green/green@2x.png';
 import icon__red_marker from './icons/red/red@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
+import icon__hydrogen_marker from './icons/blue/hydrogen@2x.png';
 
 export function getLatLongFromStationDetail(o) {
   return { lat: o.latitude, lng: o.longitude };
 }
 
-export function stationStatusMapper(key) {
+export function stationStatusMapper(key, origin) {
   const obj = {
     TEMPORARYUNAVAILABLE: icon__red_marker,
-    AVAILABLE: icon__green_marker,
-    ACTIVE: icon__green_marker,
+    AVAILABLE: origin !== 'IIT' ? icon__green_marker : icon__hydrogen_marker,
+    ACTIVE: origin !== 'IIT' ? icon__green_marker : icon__hydrogen_marker,
     UNKNOWN: icon__grey_marker
   };
   return obj[key] ? obj[key] : icon__grey_marker;

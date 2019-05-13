@@ -199,8 +199,8 @@ class EMobilityMap extends LitElement {
       const marker_position = getLatLongFromStationDetail(o);
       /** Creating the icon */
       let station_icon = L.icon({
-        iconUrl: stationStatusMapper(o.state),
-        iconSize: o.state !== 'ACTIVE' ? [30, 30] : [36, 36]
+        iconUrl: stationStatusMapper(o.state, o.origin),
+        iconSize: o.state !== 'ACTIVE' && o.state !== 'AVAILABLE' ? [30, 30] : [36, 36]
       });
       let marker = L.marker([marker_position.lat, marker_position.lng], {
         icon: station_icon
