@@ -8,12 +8,12 @@ const fetch_options = {
   })
 };
 
-export async function request__get_stations_ids() {
-  this.is_loading = true;
-  let response = await fetch(BASE_PATH + 'get-stations', fetch_options);
-  this.all_stations_ids = await response.json();
-  this.is_loading = false;
-}
+// export async function request__get_stations_ids() {
+//   this.is_loading = true;
+//   let response = await fetch(BASE_PATH + 'get-stations', fetch_options);
+//   this.all_stations_ids = await response.json();
+//   this.is_loading = false;
+// }
 
 export async function request__get_stations_details() {
   this.is_loading = true;
