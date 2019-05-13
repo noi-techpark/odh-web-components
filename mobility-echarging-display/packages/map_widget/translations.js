@@ -318,5 +318,15 @@ export const t = {
     pl: 'Charging station open',
     fr: 'Charging station open',
     ru: 'Charging station open'
+  },
+  near_places: {
+    en: 'Near places',
+    de: 'Near places',
+    it: 'Nelle vicinanze',
+    nl: 'Near places',
+    cs: 'Near places',
+    pl: 'Near places',
+    fr: 'Near places',
+    ru: 'Near places'
   }
 };

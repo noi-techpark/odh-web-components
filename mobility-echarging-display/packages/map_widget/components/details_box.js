@@ -158,14 +158,20 @@ export function render__details_box() {
             </div>
             <!-- Detail box -->
             <div class="details_box__section mt-3">
-              <div class="col-12 d-flex align-items-center">
-                <div>
-                  <img class="w-16px mr-2 d-block" src="${icon__pin}" alt="" />
-                </div>
-                <div>
-                  <p class="mb-0 mt-0 fs-18 ff-sued fw-400">Nelle vicinanze</p>
-                </div>
-              </div>
+              ${
+                this.station_near_restaurants.length || this.station_near_accomodations.length
+                  ? html`
+                      <div class="col-12 d-flex align-items-center">
+                        <div>
+                          <img class="w-16px mr-2 d-block" src="${icon__pin}" alt="" />
+                        </div>
+                        <div>
+                          <p class="mb-0 mt-0 fs-18 ff-sued fw-400">${t.near_places[this.language]}</p>
+                        </div>
+                      </div>
+                    `
+                  : null
+              }
               <div class="col-12">
                 ${this.station_near_restaurants.map(o => {
                   return html`
