@@ -92,6 +92,15 @@ export function render__filter_box() {
     repaint_map();
   };
 
+  const access_types = [[1, 'PUBLIC', t.public], [2, 'PRIVATE', t.private]];
+  const plug_types = [
+    [1, 'Type2Mennekes', 'Type 2 Mennekes'],
+    [2, 'Type 3A', 'Type 3A'],
+    [3, 'CHAdeMO', 'CHAdeMO'],
+    [4, 'CCS', 'Type 1 CCS'],
+    [5, 'Schuko', 'Schuko'],
+    [6, 'Type2 - 230Vac', 'Type2 - 230Vac']
+  ];
   return html`
     <style>
       ${getStyle(style)}
@@ -130,21 +139,27 @@ export function render__filter_box() {
         <div class="details_box__section mt-3">
           <div class="col-12">
             <p class="fs-14">${t.type_of_access[this.language]}</p>
-            <div class="custom-checkbox mt-3">
-              <label htmlFor="access-1" class="fs-16">
-                <input value="PUBLIC" type="checkbox" id="access-1" @change="${e => handle__access_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                ${utils_capitalize(t.public[this.language])}
-              </label>
-            </div>
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="access-2" class="fs-16">
-                <input value="PRIVATE" type="checkbox" id="access-2" @change="${e => handle__access_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                ${utils_capitalize(t.private[this.language])}
-              </label>
-            </div>
+            ${access_types.map((o, i) => {
+              return html`
+                <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
+                  <label htmlFor="access-${o[0]}" class="fs-16">
+                    <input
+                      value="${o[1]}"
+                      type="checkbox"
+                      id="access-${o[0]}"
+                      @change="${e => handle__access_type(e)}"
+                    />
+                    <span class="custom-checkbox-checkbox mr-2"></span>
+                    ${utils_capitalize(o[2][this.language])}
+                  </label>
+                </div>
+                ${i !== access_types.length - 1
+                  ? html`
+                      <hr />
+                    `
+                  : ''}
+              `;
+            })}
           </div>
         </div>
         <!-- Detail box -->
@@ -173,61 +188,23 @@ export function render__filter_box() {
           <div class="col-12">
             <p class="fs-14">${t.plug_type[this.language]}</p>
             <!-- "700 bar small vehicles" "UNKNOWN" -->
-            <div class="custom-checkbox mt-3">
-              <label htmlFor="plug-1" class="fs-16">
-                <input type="checkbox" id="plug-1" value="Type2Mennekes" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Type 2 Mennekes
-              </label>
-            </div>
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-2" class="fs-16">
-                <input type="checkbox" id="plug-2" value="Type 3A" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Type 3A
-              </label>
-            </div>
 
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-3" class="fs-16">
-                <input type="checkbox" id="plug-3" value="CHAdeMO" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                CHAdeMO
-              </label>
-            </div>
-            <hr />
-            <!-- <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-4" class="fs-16">
-                <input type="checkbox" id="plug-4" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Tesla Supercharger NON IN API
-              </label>
-            </div> -->
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-4" class="fs-16">
-                <input type="checkbox" id="plug-4" value="CCS" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Type 1 CCS
-              </label>
-            </div>
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-5" class="fs-16">
-                <input type="checkbox" id="plug-5" value="Schuko" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Schuko
-              </label>
-            </div>
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="plug-6" class="fs-16">
-                <input type="checkbox" id="plug-6" value="Type2 - 230Vac" @change="${e => handle__plug_type(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                Type2 - 230Vac
-              </label>
-            </div>
+            ${plug_types.map((o, i) => {
+              return html`
+                <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
+                  <label htmlFor="plug-1" class="fs-16">
+                    <input type="checkbox" id="plug-${o[0]}" value="${o[1]}" @change="${e => handle__plug_type(e)}" />
+                    <span class="custom-checkbox-checkbox mr-2"></span>
+                    ${o[2]}
+                  </label>
+                </div>
+                ${i !== plug_types.length - 1
+                  ? html`
+                      <hr />
+                    `
+                  : null}
+              `;
+            })}
           </div>
         </div>
         <!-- Detail box -->
@@ -248,15 +225,6 @@ export function render__filter_box() {
             })}
           </div>
         </div>
-        <!-- provider_list -->
-        <!-- End -->
-        <!-- Detail box -->
-        <!-- <div class="details_box__section mt-3 d-none">
-          <div class="col-12">
-            <p class="fs-14 mb-3">METODO DI PAGAMENTO</p>
-          </div>
-        </div> -->
-        <!-- End -->
       </div>
       <div class="filter_box__footer d-flex pr-3 pl-3">
         <button
