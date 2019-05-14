@@ -25,7 +25,13 @@ import style__buttons from './scss/buttons.scss';
 import style from './scss/main.scss';
 import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
-import { getLatLongFromStationDetail, getStyle, stationStatusMapper, _toggleFullScreen } from './utils.js';
+import {
+  getLatLongFromStationDetail,
+  getStyle,
+  stationStatusMapper,
+  _toggleFullScreen,
+  get_user_platform
+} from './utils.js';
 import { request__near_restaurants, request__near_accomodations } from './api/odh.js';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import leaflet_mrkcls from 'leaflet.markercluster';
@@ -345,7 +351,7 @@ class EMobilityMap extends LitElement {
         ${getStyle(style__typography)}
         ${getStyle(style__buttons)}
       </style>
-      <div id="e_mobility_map" class="e_mobility_map closed">
+      <div id=${`e_mobility_map`} class="e_mobility_map closed platform_${get_user_platform()}">
         ${this.render__loading_overlay()}
 
         <div style="z-index: 1003" class="user_actions_container__search_box">

@@ -59,3 +59,18 @@ export const encodeXml = s => {
     .replace('#xD;', ` \r `)
     .replace(`&&`, '');
 };
+
+export const get_user_platform = () => {
+  let platform = '';
+  if (/windows phone/i.test(navigator.userAgent)) {
+    platform = 'Windows Phone';
+  }
+  if (/android/i.test(navigator.userAgent)) {
+    platform = 'Android';
+  }
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    platform = 'iOS';
+  }
+  return platform;
+};
