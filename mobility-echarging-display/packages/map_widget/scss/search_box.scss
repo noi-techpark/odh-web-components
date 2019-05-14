@@ -25,6 +25,21 @@
       overflow-y: scroll;
       margin-bottom: 0;
     }
+
+    .search_box__empty_set {
+      width: 100%;
+      @media only screen and (min-width: 992px) {
+        width: 320px;
+        padding: 1rem;
+      }
+    }
+  }
+
+  .search_box__clear_query {
+    padding: 0 1rem;
+    img {
+      width: 12px;
+    }
   }
 }
 

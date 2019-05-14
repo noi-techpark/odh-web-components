@@ -7,9 +7,11 @@ import icon_center from '../icons/blue/icon_localization_blue.png';
 import icon_pin from '../icons/grey/icon_map_pin_grey.png';
 import icon_x_grey from '../icons/grey/icon_x_grey.png';
 import { t } from '../translations';
+import icon__close from '../icons/close@2x.png';
 
 export function render__search_box() {
   const handle_onchange = e => {
+    this.query_nominatim = e.target.value;
     if (e.target.value) {
       debounced_request(e.target.value);
       this.showFilters = false;
@@ -75,6 +77,23 @@ export function render__search_box() {
     `;
   };
 
+  const handle_clear_input = () => {
+    const input_box = this.shadowRoot.getElementById('id_search_box__input');
+    input_box.value = '';
+    this.query_nominatim = '';
+    this.searched_places = [];
+  };
+
+  const handle_focus_input = () => {
+    const input_box = this.shadowRoot.getElementById('id_search_box__input');
+    this.query_nominatim = input_box.value;
+    debounced_request(this.query_nominatim);
+    if (this.query_nominatim.length) {
+      this.showFilters = false;
+      this.current_station = {};
+    }
+  };
+
   const { radius, access_type, plug_type, state, provider } = this.filters;
 
   return html`
@@ -90,9 +109,18 @@ export function render__search_box() {
         class="search_box"
         name="place_query"
         type="text"
+        id="id_search_box__input"
         placeholder="${t.search_on_greenmobility[this.language]}"
+        @focus=${handle_focus_input}
       />
-      <div class="">
+      ${this.query_nominatim.length
+        ? html`
+            <div @click=${handle_clear_input} class="search_box__clear_query">
+              <img src="${icon__close}" alt="" />
+            </div>
+          `
+        : null}
+      <div>
         <div style="height: 24px; width: 1px; background-color: rgba(136, 137, 139, 0.24);"></div>
       </div>
       <div @click="${() => this.handleToggleShowFilters()}" class="utils--cursor-pointer">
@@ -110,6 +138,17 @@ export function render__search_box() {
         <img class="w-18px ml-3 mr-3" src="${this.showFilters ? icon_x_grey : icon_filter}" alt="" />
       </div>
       ${this.searched_places.length ? render__places_list() : null}
+      ${!this.searched_places.length && this.query_nominatim.length
+        ? html`
+            <div class="position-absolute search_box__container__resoult_list">
+              <div class="bkg-white">
+                <div class="search_box__empty_set">
+                  ${t.empty_set__nominatim_locations[this.language]}
+                </div>
+              </div>
+            </div>
+          `
+        : null}
     </div>
   `;
 }

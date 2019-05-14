@@ -16,6 +16,7 @@ export const observed_properties = {
   station_near_restaurants: { type: Object },
   station_near_accomodations: { type: Object },
   provider_list: { type: Array },
+  query_nominatim: { type: String },
   // Parameters
   logo: { type: String },
   language: { type: String }
