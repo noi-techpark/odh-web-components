@@ -204,10 +204,10 @@ input[type='text'] {
     top: 68px;
   }
   @include apple-device-mq($iPhone8) {
-    height: calc(100% - 144px);
+    height: calc(100% - 145px);
   }
   @include apple-device-mq() {
-    height: calc(100% - 144px);
+    height: calc(100% - 185px);
   }
 }
 

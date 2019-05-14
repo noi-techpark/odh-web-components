@@ -97,7 +97,7 @@ export function render__filter_box() {
       ${getStyle(style)}
     </style>
     <div class="details_box filter_box">
-      <div class="details_box__body">
+      <div class="filter_box__body">
         <!-- Detail box -->
         <div class="details_box__section mt-3">
           <div class="col-12 d-flex justify-content-between align-items-center flex-wrap">
@@ -231,7 +231,7 @@ export function render__filter_box() {
           </div>
         </div>
         <!-- Detail box -->
-        <div class="details_box__section mt-3 mb-5">
+        <div class="details_box__section mt-3 mb-3">
           <div class="col-12">
             <p class="fs-14 mb-3">${t.provider[this.language]}</p>
             ${this.provider_list.map((o, i) => {

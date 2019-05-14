@@ -375,7 +375,9 @@ class EMobilityMap extends LitElement {
         >
           ${this.render__filter_box()}
         </div>
+
         <div id="map" class="map closed"></div>
+
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>
         </div>
@@ -420,6 +422,7 @@ class EMobilityMap extends LitElement {
             </div>
           </div>
         </div>
+
         ${this.showRatingModal ? this.render__modal__star_rating() : null}
       </div>
     `;
