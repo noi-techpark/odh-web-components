@@ -13,6 +13,7 @@ export function render__search_box() {
     if (e.target.value) {
       debounced_request(e.target.value);
       this.showFilters = false;
+      this.current_station = {};
     } else {
       this.searched_places = [];
     }
@@ -52,22 +53,24 @@ export function render__search_box() {
 
   const render__places_list = () => {
     return html`
-      <div class="position-absolute bkg-white search_box__container__resoult_list">
-        <ul>
-          <li @click="${handle__move_to_current_position}" class="p-3 d-flex align-items-center">
-            <img class="w-14px mr-2" src="${icon_center}" alt="" /> ${t.my_position[this.language]}
-          </li>
-          ${this.searched_places.map(o => {
-            return html`
-              <li
-                @click="${() => handle__move_to_place(o.lat, o.lon)}"
-                class="pt-2 pb-2 pl-3 pr-3 d-flex align-items-center"
-              >
-                <img class="w-16px mr-2" src="${icon_pin}" alt="" /> ${o.display_name}
-              </li>
-            `;
-          })}
-        </ul>
+      <div class="position-absolute search_box__container__resoult_list">
+        <div class="bkg-white">
+          <ul>
+            <li @click="${handle__move_to_current_position}" class="p-3 d-flex align-items-center">
+              <img class="w-14px mr-2" src="${icon_center}" alt="" /> ${t.my_position[this.language]}
+            </li>
+            ${this.searched_places.map(o => {
+              return html`
+                <li
+                  @click="${() => handle__move_to_place(o.lat, o.lon)}"
+                  class="pt-2 pb-2 pl-3 pr-3 d-flex align-items-center"
+                >
+                  <img class="w-16px mr-2" src="${icon_pin}" alt="" /> ${o.display_name}
+                </li>
+              `;
+            })}
+          </ul>
+        </div>
       </div>
     `;
   };

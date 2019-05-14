@@ -349,6 +349,16 @@ class EMobilityMap extends LitElement {
       </style>
       <div id=${`e_mobility_map`} class="e_mobility_map closed platform_${get_user_platform()}">
         ${this.render__loading_overlay()}
+        ${this.searched_places.length
+          ? html`
+              <div
+                @click=${() => {
+                  this.searched_places = [];
+                }}
+                class="search_box__resoult_list__underlay"
+              ></div>
+            `
+          : null}
 
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}
