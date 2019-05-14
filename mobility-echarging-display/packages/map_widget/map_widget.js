@@ -13,11 +13,6 @@ import { render__filter_values_mobile } from './components/filter_values_mobile.
 import { render__modal__star_rating } from './components/modal__star_rating';
 import { render__loading_overlay } from './components/overlay_loading.js';
 import { render__search_box } from './components/search_box';
-// import icon_center from './icons/blue/icon_localization_blue.png';
-// import icon_minus from './icons/grey/icon_minus_grey.png';
-// import icon_plus from './icons/grey/icon_plus_grey.png';
-// import icon_full_screen_maximize_grey from './icons/grey/icon_full_screen_maximize_grey.png';
-// import icon_full_screen_minimize_grey from './icons/grey/icon_full_screen_minimize_grey.png';
 import image_logo from './icons/logo.png';
 import user__marker from './icons/user.png';
 import { observed_properties } from './observed_properties.js';
