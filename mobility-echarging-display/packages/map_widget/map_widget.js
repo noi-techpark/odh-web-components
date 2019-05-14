@@ -285,6 +285,14 @@ class EMobilityMap extends LitElement {
   }
 
   handleToggleShowFilters() {
+    /** Closing details box */
+    const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
+    if (user_actions_container__details) {
+      user_actions_container__details.classList.remove('open');
+    }
+    this.current_station = {};
+
+    /** Closing the places results box */
     if (this.searched_places.length && !this.showFilters) {
       this.searched_places = [];
     }
