@@ -13,11 +13,11 @@ import { render__filter_values_mobile } from './components/filter_values_mobile.
 import { render__modal__star_rating } from './components/modal__star_rating';
 import { render__loading_overlay } from './components/overlay_loading.js';
 import { render__search_box } from './components/search_box';
-import icon_center from './icons/blue/icon_localization_blue.png';
-import icon_minus from './icons/grey/icon_minus_grey.png';
-import icon_plus from './icons/grey/icon_plus_grey.png';
-import icon_full_screen_maximize_grey from './icons/grey/icon_full_screen_maximize_grey.png';
-import icon_full_screen_minimize_grey from './icons/grey/icon_full_screen_minimize_grey.png';
+// import icon_center from './icons/blue/icon_localization_blue.png';
+// import icon_minus from './icons/grey/icon_minus_grey.png';
+// import icon_plus from './icons/grey/icon_plus_grey.png';
+// import icon_full_screen_maximize_grey from './icons/grey/icon_full_screen_maximize_grey.png';
+// import icon_full_screen_minimize_grey from './icons/grey/icon_full_screen_minimize_grey.png';
 import image_logo from './icons/logo.png';
 import user__marker from './icons/user.png';
 import { observed_properties } from './observed_properties.js';
@@ -36,6 +36,7 @@ import { request__near_restaurants, request__near_accomodations } from './api/od
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import leaflet_mrkcls from 'leaflet.markercluster';
 import { get_provider_list } from './utils/get_provider_list.js';
+import { render__map_controls } from './components/map_controls.js';
 
 class EMobilityMap extends LitElement {
   constructor() {
@@ -381,48 +382,8 @@ class EMobilityMap extends LitElement {
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>
         </div>
-        <div class="controls_container">
-          <div
-            @click="${this.handleFullScreenMap}"
-            class="${this.isFullScreen
-              ? 'mb-2'
-              : ''} d-flex align-items-center justify-content-center d-lg-none mb-lg-3 control"
-          >
-            <img src="${this.isFullScreen ? icon_full_screen_minimize_grey : icon_full_screen_maximize_grey}" alt="" />
-          </div>
-          <div
-            id="centerMap"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center mb-2 mb-lg-3 control"
-          >
-            <div>
-              <img src="${icon_center}" alt="" />
-            </div>
-          </div>
-          <div
-            id="zoomMapIn"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center control"
-          >
-            <div>
-              <img src="${icon_plus}" alt="" />
-            </div>
-          </div>
-          <div class="controls_container__divider ${this.isFullScreen ? '' : 'd-none d-lg-block'}"><div></div></div>
-          <div
-            id="zoomMapOut"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center control"
-          >
-            <div>
-              <img src="${icon_minus}" alt="" />
-            </div>
-          </div>
-        </div>
 
+        ${render__map_controls(this.isFullScreen, this.handleFullScreenMap)}
         ${this.showRatingModal ? this.render__modal__star_rating() : null}
       </div>
     `;
