@@ -120,9 +120,9 @@ export function render__details_box() {
                                 `
                             )}
                           </div>
-                          <div class="text-center flex-fill mr-2 ml-2">
+                          <!-- <div class="text-center flex-fill mr-2 ml-2">
                             <img class="w-24px d-table mr-auto ml-auto" src="${icon__info}" alt="" />
-                          </div>
+                          </div> -->
                         </div>
                       `;
                     })
