@@ -96,7 +96,13 @@ export function render__search_box() {
         <div style="height: 24px; width: 1px; background-color: rgba(136, 137, 139, 0.24);"></div>
       </div>
       <div @click="${() => this.handleToggleShowFilters()}" class="utils--cursor-pointer">
-        ${radius > 0 || access_type.length || plug_type.length || plug_type.length || state.length || provider.length
+        ${(radius > 0 ||
+          access_type.length ||
+          plug_type.length ||
+          plug_type.length ||
+          state.length ||
+          provider.length) &&
+        !this.showFilters
           ? html`
               <div class="search_box__filter_badge"></div>
             `
