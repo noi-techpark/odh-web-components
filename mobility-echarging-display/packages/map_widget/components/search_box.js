@@ -50,6 +50,8 @@ export function render__search_box() {
 
   const handle__move_to_place = (lat, lng) => {
     this.is_loading = true;
+    this.searched_places = [];
+    this.query_nominatim = '';
     manage_map(lat, lng);
   };
 
