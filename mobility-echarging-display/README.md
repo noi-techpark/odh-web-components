@@ -104,12 +104,6 @@ TODO
 
 ## Contributing
 
-## Authors
-
-- **Luca Fedrizzi** ([luca.fedrizzi@belkadigital.com](luca.fedrizzi@belkadigital.com)) - _Initial work_ - [fedriz](https://github.com/fedriz)
-
-## License
-
 TODO
 
 ## Screenshots
@@ -119,3 +113,11 @@ TODO
 
 ### Dashboard
 ![dashboard](screenshots/dashboard.png)
+
+## Authors
+
+- **Luca Fedrizzi** ([luca.fedrizzi@belkadigital.com](luca.fedrizzi@belkadigital.com)) - _Initial work_ - [fedriz](https://github.com/fedriz)
+
+## License
+
+TODO
