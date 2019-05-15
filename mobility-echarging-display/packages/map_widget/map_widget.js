@@ -67,6 +67,7 @@ class EMobilityMap extends LitElement {
     this.station_near_accomodations = [];
     this.provider_list = [];
     this.query_nominatim = '';
+    this.details_mobile_state = false;
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);

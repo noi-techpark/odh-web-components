@@ -37,7 +37,6 @@ export async function card_painter_3() {
               const element = all_dom_labels[i];
               element.classList.add('disabled');
             }
-            console.log(all_dom_labels);
             const prev_dom_label = this.shadowRoot.getElementById(current_type_hover);
             if (prev_dom_label) {
               prev_dom_label.classList.remove('active');

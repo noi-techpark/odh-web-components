@@ -1,4 +1,5 @@
 import { html } from 'lit-element';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import icon__card from '../icons/card.png';
 import icon__close from '../icons/close@2x.png';
 import icon__green_dot from '../icons/green/green_dot.png';
@@ -18,6 +19,8 @@ import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
 import { render__h1 } from './typography.js';
+import icon__up from '../icons/up.svg';
+import icon__down from '../icons/down.svg';
 
 export function render__details_box() {
   const { state, accessType, name, plugs_status, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
@@ -26,20 +29,21 @@ export function render__details_box() {
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
 
   if (user_actions_container__details && details_box__expand_handle__details) {
-    initialize_swipe(details_box__expand_handle__details, user_actions_container__details);
+    let binded_initialize_swipe = initialize_swipe.bind(this);
+    binded_initialize_swipe(details_box__expand_handle__details, user_actions_container__details);
   }
 
   this.render__rating_section = render__rating_section.bind(this);
+
   return html`
       <style>
         ${getStyle(style)}
       </style>
       <div class="details_box">
-        <div id="details_box__expand_handle__details" class="details_box__expand_handle pt-2 pb-2 d-sm-none" >
-          <div
-            class="pt-1"
-            style="background-color:#CCCCCC;border-radius:4px;width:25px;height:4px;margin:0 auto;"
-          ></div>
+        <div id="details_box__expand_handle__details" class="details_box__expand_handle pt-2 pb-2 d-sm-none">
+          <!-- <div class="details_box__expand_handle__up"></div>
+          <div class="details_box__expand_handle__down"></div> -->
+          ${this.details_mobile_state ? unsafeHTML(icon__down) : unsafeHTML(icon__up)}
         </div>
         <div class="details_box__header">
           ${render__state_label(state, this.language)} ${render__state_label(accessType, this.language)}
