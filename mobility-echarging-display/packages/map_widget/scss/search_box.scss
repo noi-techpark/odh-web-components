@@ -26,11 +26,11 @@
       margin-bottom: 0;
     }
 
+    width: 100%;
     .search_box__empty_set {
-      width: 100%;
+      padding: 1rem;
       @media only screen and (min-width: 992px) {
         width: 320px;
-        padding: 1rem;
       }
     }
   }

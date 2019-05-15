@@ -145,7 +145,9 @@ export function render__search_box() {
             <div class="position-absolute search_box__container__resoult_list">
               <div class="bkg-white">
                 <div class="search_box__empty_set">
-                  ${t.empty_set__nominatim_locations[this.language]}
+                  <p>
+                    ${t.empty_set__nominatim_locations[this.language]}
+                  </p>
                 </div>
               </div>
             </div>
