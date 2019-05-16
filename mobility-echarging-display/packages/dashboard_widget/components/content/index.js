@@ -6,8 +6,9 @@ import {
   render_utilized_columns,
   render_columns_number
 } from './components/card_renders';
+import { t } from '../../translations';
 
-export function Content(props) {
+export function Content() {
   return html`
     <div class="content">
       <div class="container">
@@ -17,26 +18,26 @@ export function Content(props) {
               ${Card({
                 load_perc: this.load_perc_1,
                 refresh_function: this.card_painter_1,
-                title: 'Colonnine in funzione',
-                content: render_working_columns(this.chart_1_value)
+                title: t['columns_in_operation'][this.language],
+                content: render_working_columns(this.chart_1_value, this.language)
               })}
               ${Card({
                 load_perc: this.load_perc_2,
                 refresh_function: this.card_painter_2,
-                title: 'Numero di colonnine a Bolzano',
-                content: render_columns_number(this.number_of_stations)
+                title: t['number_of_columns'][this.language],
+                content: render_columns_number(this.number_of_stations, this.language)
               })}
               ${Card({
                 load_perc: this.load_perc_3,
                 refresh_function: this.card_painter_3,
-                title: 'Tipologia di prese',
+                title: t['type_of_plugs'][this.language],
                 content: render_plug_types()
               })}
               ${Card({
                 load_perc: this.load_perc_4,
                 refresh_function: this.card_painter_4,
-                title: 'Colonnine utilizzate',
-                content: render_utilized_columns({ chart_3_value: this.chart_3_value })
+                title: t['columns_used'][this.language],
+                content: render_utilized_columns({ chart_3_value: this.chart_3_value, language: this.language })
               })}
             </div>
           </div>
