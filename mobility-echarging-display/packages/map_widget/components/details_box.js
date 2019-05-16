@@ -24,6 +24,7 @@ import icon__down from '../icons/down.svg';
 
 export function render__details_box() {
   const { state, accessType, name, plugs_status, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
+  const { origin } = this.current_station;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
@@ -60,7 +61,7 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(name, stationStatusMapper(state))}
+            ${render__h1(name, stationStatusMapper(state, origin))}
             <div class="col-12">
               <p class="color-black-300 mt-2 fw-300">${this.current_station.address}</p>
               <p class="color-black-300 fw-300">${this.current_station.municipality}</p>
