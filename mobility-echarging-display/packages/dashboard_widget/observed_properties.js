@@ -1,4 +1,5 @@
 export const observed_properties = {
+  language: { type: String },
   chart_1_value: { type: Number },
   number_of_stations: { type: Number },
   chart_2_value: { type: Object },

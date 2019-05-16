@@ -1,8 +1,9 @@
 import { html } from 'lit-element';
 import green_pin from '../../../img/green@3x.png';
 import orange_pin from '../../../img/orange@3x.png';
+import { t } from '../../../translations';
 
-export const render_working_columns = chart_1_value => {
+export const render_working_columns = (chart_1_value, language) => {
   return html`
     <div class="d-md-flex working_columns__container">
       <div class="working_columns">
@@ -18,7 +19,7 @@ export const render_working_columns = chart_1_value => {
           </div>
           <div class="working_columns__divider mt-2"></div>
           <p class="text-center mt-3 working_columns__description">
-            Il ${chart_1_value}% delle colonnine è in funzione!
+            ${chart_1_value}% ${t['of_the_columns_is_in_operation'][language]}
           </p>
         </div>
       </div>
@@ -26,15 +27,14 @@ export const render_working_columns = chart_1_value => {
   `;
 };
 
-export const render_columns_number = n => {
+export const render_columns_number = (n, language) => {
   return html`
     <div class="d-md-flex columns_number__container">
       <div>
         <p class="columns_number__container__number fw-600">${n}</p>
         <div class="columns_number__container__divider mt-2"></div>
         <p class="columns_number__container__description fs-16 mt-3">
-          Colonnine presenti in tutta la <br />
-          provincia di Bolzano
+          ${t['current_number_of_columns'][language]}
         </p>
       </div>
     </div>
@@ -50,11 +50,11 @@ export const render_plug_types = () => {
         </div>
       </div>
       <div class="plug_list_names">
-        <div class="plug_list_names__name type2_mannekes">Type 2 - MANNEKES</div>
-        <div class="plug_list_names__name type2_230vac">Type 2 - 230Vac</div>
-        <div class="plug_list_names__name type2_400vac">Type 2 - 400Vac</div>
-        <div class="plug_list_names__name type3a">Type 3A</div>
-        <div class="plug_list_names__name chademo">CHAdeMO</div>
+        <div id="Type2Mennekes" class="plug_list_names__name type2_mannekes">Type 2 - MANNEKES</div>
+        <div id="Type2-230Vac" class="plug_list_names__name type2_230vac">Type 2 - 230Vac</div>
+        <div id="Type2-400Vac" class="plug_list_names__name type2_400vac">Type 2 - 400Vac</div>
+        <div id="Type3A" class="plug_list_names__name type3a">Type 3A</div>
+        <div id="CHAdeMO" class="plug_list_names__name chademo">CHAdeMO</div>
       </div>
     </div>
   `;
@@ -88,7 +88,7 @@ export const render_utilized_columns = props => {
       </div>
       <div class="chart_utilized__description">
         <p>
-          Percentuale di colonnine utilizzate a Bolzano in tempo reale
+          ${t['percentage_of_columns_used_in_real_time'][props.language]}
         </p>
       </div>
     </div>

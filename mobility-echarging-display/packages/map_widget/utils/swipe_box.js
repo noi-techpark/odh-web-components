@@ -4,9 +4,11 @@ var touchendX = 0;
 var touchendY = 0;
 
 export function initialize_swipe(gesturedZone, modifiedElement) {
+  let binded_handleGesure = handleGesure.bind(this);
+
   gesturedZone.addEventListener(
     'touchstart',
-    function(e) {
+    e => {
       e.preventDefault();
       touchstartX = e.changedTouches[0].screenX;
       touchstartY = e.changedTouches[0].screenY;
@@ -16,11 +18,11 @@ export function initialize_swipe(gesturedZone, modifiedElement) {
 
   gesturedZone.addEventListener(
     'touchend',
-    function(e) {
+    e => {
       e.preventDefault();
       touchendX = e.changedTouches[0].screenX;
       touchendY = e.changedTouches[0].screenY;
-      handleGesure(modifiedElement);
+      binded_handleGesure(modifiedElement);
     },
     false
   );
@@ -30,10 +32,12 @@ function handleGesure(modifiedElement) {
   if (touchendY >= touchstartY) {
     // console.log('Swiped up');
     modifiedElement.classList.remove('open');
+    this.details_mobile_state = false;
   }
   if (touchendY <= touchstartY) {
     // console.log(swiped + 'down!');
     modifiedElement.classList.add('open');
+    this.details_mobile_state = true;
   }
   if (touchendX <= touchstartX) {
     // console.log('Swiped left');

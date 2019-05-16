@@ -328,5 +328,15 @@ export const t = {
     pl: 'Near places',
     fr: 'Near places',
     ru: 'Near places'
+  },
+  empty_set__nominatim_locations: {
+    en: 'No resoults',
+    de: 'No resoults',
+    it: 'Nessun risultato',
+    nl: 'No resoults',
+    cs: 'No resoults',
+    pl: 'No resoults',
+    fr: 'No resoults',
+    ru: 'No resoults'
   }
 };

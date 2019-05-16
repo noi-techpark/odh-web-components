@@ -1,4 +1,4 @@
-# E-MOBILITY
+# Mobility Echarging
 
 This project contains all the webcomponents of the greenmobility project.
 You can find all the information about it on the official website [https://www.greenmobility.bz.it/it/](https://www.greenmobility.bz.it/it/).
@@ -103,6 +103,16 @@ TODO
 TODO
 
 ## Contributing
+
+TODO
+
+## Screenshots
+
+### Map
+![map](screenshots/map.png)
+
+### Dashboard
+![dashboard](screenshots/dashboard.png)
 
 ## Authors
 

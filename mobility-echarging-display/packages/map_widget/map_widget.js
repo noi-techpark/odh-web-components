@@ -13,11 +13,6 @@ import { render__filter_values_mobile } from './components/filter_values_mobile.
 import { render__modal__star_rating } from './components/modal__star_rating';
 import { render__loading_overlay } from './components/overlay_loading.js';
 import { render__search_box } from './components/search_box';
-import icon_center from './icons/blue/icon_localization_blue.png';
-import icon_minus from './icons/grey/icon_minus_grey.png';
-import icon_plus from './icons/grey/icon_plus_grey.png';
-import icon_full_screen_maximize_grey from './icons/grey/icon_full_screen_maximize_grey.png';
-import icon_full_screen_minimize_grey from './icons/grey/icon_full_screen_minimize_grey.png';
 import image_logo from './icons/logo.png';
 import user__marker from './icons/user.png';
 import { observed_properties } from './observed_properties.js';
@@ -25,11 +20,19 @@ import style__buttons from './scss/buttons.scss';
 import style from './scss/main.scss';
 import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
-import { getLatLongFromStationDetail, getStyle, stationStatusMapper, _toggleFullScreen } from './utils.js';
+import {
+  getLatLongFromStationDetail,
+  getStyle,
+  stationStatusMapper,
+  _toggleFullScreen,
+  get_user_platform
+} from './utils.js';
 import { request__near_restaurants, request__near_accomodations } from './api/odh.js';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import leaflet_mrkcls from 'leaflet.markercluster';
 import { get_provider_list } from './utils/get_provider_list.js';
+import { render__map_controls } from './components/map_controls.js';
+import { render__search_box_underlay } from './components/search_box_underlay.js';
 
 class EMobilityMap extends LitElement {
   constructor() {
@@ -63,6 +66,8 @@ class EMobilityMap extends LitElement {
     this.station_near_restaurants = [];
     this.station_near_accomodations = [];
     this.provider_list = [];
+    this.query_nominatim = '';
+    this.details_mobile_state = false;
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);
@@ -70,6 +75,7 @@ class EMobilityMap extends LitElement {
     this.render__modal__star_rating = render__modal__star_rating.bind(this);
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
+    this.render__search_box_underlay = render__search_box_underlay.bind(this);
     /* Requests */
     this.request__get_stations_details = request__get_stations_details.bind(this);
     this.request__get_stations_plugs_details = request__get_stations_plugs_details.bind(this);
@@ -285,6 +291,14 @@ class EMobilityMap extends LitElement {
   }
 
   handleToggleShowFilters() {
+    /** Closing details box */
+    const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
+    if (user_actions_container__details) {
+      user_actions_container__details.classList.remove('open');
+    }
+    this.current_station = {};
+
+    /** Closing the places results box */
     if (this.searched_places.length && !this.showFilters) {
       this.searched_places = [];
     }
@@ -337,9 +351,10 @@ class EMobilityMap extends LitElement {
         ${getStyle(style__typography)}
         ${getStyle(style__buttons)}
       </style>
-      <div id="e_mobility_map" class="e_mobility_map closed">
+      <div id=${`e_mobility_map`} class="e_mobility_map closed platform_${get_user_platform()}">
         ${this.render__loading_overlay()}
-
+        
+        ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}
         </div>
@@ -361,51 +376,14 @@ class EMobilityMap extends LitElement {
         >
           ${this.render__filter_box()}
         </div>
+
         <div id="map" class="map closed"></div>
+
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>
         </div>
-        <div class="controls_container">
-          <div
-            @click="${this.handleFullScreenMap}"
-            class="${this.isFullScreen
-              ? 'mb-2'
-              : ''} d-flex align-items-center justify-content-center d-lg-none mb-lg-3 control"
-          >
-            <img src="${this.isFullScreen ? icon_full_screen_minimize_grey : icon_full_screen_maximize_grey}" alt="" />
-          </div>
-          <div
-            id="centerMap"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center mb-2 mb-lg-3 control"
-          >
-            <div>
-              <img src="${icon_center}" alt="" />
-            </div>
-          </div>
-          <div
-            id="zoomMapIn"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center control"
-          >
-            <div>
-              <img src="${icon_plus}" alt="" />
-            </div>
-          </div>
-          <div class="controls_container__divider ${this.isFullScreen ? '' : 'd-none d-lg-block'}"><div></div></div>
-          <div
-            id="zoomMapOut"
-            class="${this.isFullScreen
-              ? 'd-flex'
-              : 'd-none'} d-lg-flex align-items-center justify-content-center control"
-          >
-            <div>
-              <img src="${icon_minus}" alt="" />
-            </div>
-          </div>
-        </div>
+
+        ${render__map_controls(this.isFullScreen, this.handleFullScreenMap)}
         ${this.showRatingModal ? this.render__modal__star_rating() : null}
       </div>
     `;
@@ -415,3 +393,26 @@ class EMobilityMap extends LitElement {
 if (!window.customElements.get('e-mobility-map-widget')) {
   window.customElements.define('e-mobility-map-widget', EMobilityMap);
 }
+
+/*
+ ${this.searched_places.length
+          ? html`
+              <div
+                @click=${() => {
+                  this.searched_places = [];
+                }}
+                class="search_box__resoult_list__underlay"
+              ></div>
+            `
+          : null}
+        ${!this.searched_places.length && this.query_nominatim.length
+          ? html`
+              <div
+                @click=${() => {
+                  this.query_nominatim = '';
+                }}
+                class="search_box__resoult_list__underlay"
+              ></div>
+            `
+          : null} 
+ */
