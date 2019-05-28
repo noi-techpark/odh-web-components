@@ -13,7 +13,6 @@ pipeline {
                     steps {
 			sh 'test -d mobility-echarging-display'
                         sh 'test -e mobility-echarging-display/README.md'
-			sh 'cd mobility-echarging-display && npm test'
                     }
                 }
             }
