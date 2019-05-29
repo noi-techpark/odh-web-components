@@ -14,6 +14,6 @@
     "babel-cli": "^6.26.0",
     "lerna": "^3.13.1"
   },
-  "name": "idm",
+  "name": "NOI",
   "version": "1.0.0"
 }
