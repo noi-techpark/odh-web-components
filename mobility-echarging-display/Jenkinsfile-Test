@@ -5,17 +5,16 @@ pipeline {
             additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
         }
     }
-
+    environment{
+       AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+       AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
     stages {
-        stage('Test - web-components') {
-	    parallel{
-		stage('emobility-display'){
-                    steps {
-			sh 'test -d mobility-echarging-display'
-                        sh 'test -e mobility-echarging-display/README.md'
-                    }
-                }
-            }
+	stage('test'){
+          steps {
+	    sh 'test -d mobility-echarging-display'
+            sh 'test -e mobility-echarging-display/README.md'
+          }
         }
 	stage('Build'){
           steps{

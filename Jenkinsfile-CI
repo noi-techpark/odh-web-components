@@ -8,7 +8,7 @@ pipeline {
 
     stages {
         stage('Test - web-components') {
-	    parallel{
+	    stages{
 		stage('emobility-display'){
                     steps {
 			sh 'test -d mobility-echarging-display'
