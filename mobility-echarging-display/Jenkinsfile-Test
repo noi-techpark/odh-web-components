@@ -37,6 +37,7 @@ pipeline {
         }
 	stage('Deploy'){
           steps{
+            s3Delete(bucket: 'demo.emobility.bz.it', path: '/')
             s3Upload(bucket: 'demo.emobility.bz.it', acl: 'PublicRead', file: 'public')
           } 
         }
