@@ -25,14 +25,19 @@ pipeline {
         }
 	stage('Archive'){
           steps{
-            sh 'mkdir ./mobility-echarging-display/public/scripts'
-            sh 'cp ./mobility-echarging-display/dist/*.js ./mobility-echarging-display/public/scripts'
-            sh 'cp -r mobility-echarging-display/work/fonts ./mobility-echarging-display/public/'
+            sh 'cd public && mkdir -p scripts fonts'
+            sh 'cp ./mobility-echarging-display/dist/*.js public/scripts'
+            sh 'cp -r mobility-echarging-display/work/fonts/* public/fonts'
+          }
+        }
+	stage('index'){
+          steps{
+            sh "cd public/ && tree -I 'fonts|scripts' -T 'Available web-components' -d -H '.' -L 1 --noreport --charset utf-8 > index.html"
           }
         }
 	stage('Deploy'){
           steps{
-            s3Upload(bucket: 'demo.emobility.bz.it', acl: 'PublicRead', file: './mobility-echarging-display/public')
+            s3Upload(bucket: 'demo.emobility.bz.it', acl: 'PublicRead', file: 'public')
           } 
         }
     }
