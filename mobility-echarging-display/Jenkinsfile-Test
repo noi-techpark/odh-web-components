@@ -23,9 +23,16 @@ pipeline {
              sh 'cd mobility-echarging-display && yarn bc'
           }
         }
+	stage('Archive'){
+          steps{
+            sh 'mkdir ./mobility-echarging-display/public/scripts'
+            sh 'cp ./mobility-echarging-display/dist/*.js ./mobility-echarging-display/public/scripts'
+            sh 'cp -r mobility-echarging-display/work/fonts ./mobility-echarging-display/public/'
+          }
+        }
 	stage('Deploy'){
           steps{
-            s3Upload(bucket: 'demo.emobility.bz.it', acl: 'PublicRead', file: './mobility-echarging-display/work')
+            s3Upload(bucket: 'demo.emobility.bz.it', acl: 'PublicRead', file: './mobility-echarging-display/public')
           } 
         }
     }

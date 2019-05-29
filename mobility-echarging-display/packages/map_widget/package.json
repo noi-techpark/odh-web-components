@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "watch": "webpack --config webpack.dev.js"
+    "watch": "webpack --config webpack.dev.js",
+    "demo": "webpack --config webpack.demo.js"
   },
   "devDependencies": {
     "css-loader": "^2.1.1",
