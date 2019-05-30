@@ -37,8 +37,8 @@ pipeline {
         }
 	stage('Deploy'){
           steps{
-            s3Delete(bucket: 'it.bz.opendatahub.webcomponents.demo', path: '/')
-            s3Upload(bucket: 'it.bz.opendatahub.webcomponents.demo', acl: 'PublicRead', file: 'public')
+            s3Delete(bucket: 'it.bz.odh.webcomponents.demo', path: '/')
+            s3Upload(bucket: 'it.bz.odh.webcomponents.demo', acl: 'PublicRead', file: 'public')
           } 
         }
     }
