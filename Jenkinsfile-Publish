@@ -1,0 +1,35 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'docker/dockerfile-node'
+            additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+        }
+    }
+    environment{
+       NPM_RC = credentials('npm-rc')
+    }
+    stages {
+      stage('config'){
+        steps {
+          sh 'cat ${NPM_RC} > ~/.npmrc'
+        }
+      }
+      stage('Build'){
+        steps{
+             sh 'cd mobility-echarging-display && yarn'
+             sh 'cd mobility-echarging-display && lerna bootstrap'
+             sh 'cd mobility-echarging-display && yarn bc'
+        }
+      }
+      stage('Publish Dashboard'){
+        steps{
+          sh 'cd mobility-echarging-display/packages/dashboard_widget && npm publish --access public --dry-run'
+        }
+      }
+      stage('Publish Map'){
+        steps{
+          sh 'cd mobility-echarging-display/packages/map_widget && npm publish --access public --dry-run'
+        }
+      }
+    }
+}
