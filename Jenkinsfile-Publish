@@ -11,7 +11,7 @@ pipeline {
     stages {
       stage('config'){
         steps {
-          sh 'cat ${NPM_RC} > ~/.npmrc'
+          sh 'cat ${NPM_RC} > .npmrc'
         }
       }
       stage('Build'){
