@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/noi-techpark/webcomp-generic-map@master/dist/map_widget.min.js"></script>
     <style>
       .widget-container {
         width: 90vw;
@@ -21,41 +20,43 @@
         margin-top: 1vh;
         margin-bottom: 4vh;
         border-radius: 8px;
-        overflow: scroll;
+        overflow: auto;
         width: calc(100% - 32px);
         position: relative;
-      }
-      @media only screen and (min-width: 678px) {
-        .widget-container {
-          width: 80vw;
-          margin: 0 auto;
-        }
-      }
-      @media only screen and (min-width: 1400px) {
-        .widget-container {
-          width: 70vw;
-          margin: 0 auto;
-        }
       }
     </style>
   </head>
   <body>
     <div class="widget-container">
-      <h2>Snippet</h2>
+      <h2>Generic Map to access the Open Data Hub Mobility API v2 (with Ninja)</h2>
       <div class="code_snippet">
         <pre>
-	  <code>
-&lt;map-widget
-&gt;&lt;/map-widget&gt;
-&lt;script src="[path to your scripts]/map_widget.js"&gt;&lt;/script&gt;
-	  </code>
+<code>&lt;map-widget station-types="CreativeIndustry"&gt;&lt;/map-widget&gt;                 &lt;!-- Show only one type of stations --&gt;
+&lt;map-widget station-types="EchargingStation,EchargingPlug"&gt;&lt;/map-widget&gt;   &lt;!-- Show two types of stations --&gt;
+&lt;map-widget&gt;&lt;/map-widget&gt;                                                  &lt;!-- Show all stations with associated coordinates that are active --&gt;
+&lt;map-widget station-types="*"&gt;&lt;/map-widget&gt;                                &lt;!-- Show all stations with associated coordinates that are active (alternative) --&gt;
+
+&lt;script src="[path to your scripts]/map_widget.js"&gt;&lt;/script&gt;</code>
         </pre>
       </div>
     </div>
 
     <div class="widget-container">
+      <h2>Creative Industries</h2>
+      <map-widget station-types="CreativeIndustry"></map-widget>
+    </div>
+
+    <div class="widget-container">
+      <h2>E-Mobility</h2>
+      <map-widget station-types="EchargingStation,EchargingPlug"></map-widget>
+    </div>
+
+    <div class="widget-container">
+      <h2>All stations</h2>
       <map-widget></map-widget>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/noi-techpark/webcomp-generic-map@master/dist/map_widget.min.js"></script>
 
   </body>
 </html>
