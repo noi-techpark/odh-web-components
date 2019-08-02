@@ -32,16 +32,19 @@
       <div class="code_snippet">
         <pre>
 <code>&lt;!-- Show only one type of station --&gt;
-&lt;map-widget station-types="CreativeIndustry"&gt;&lt;/map-widget&gt;
+&lt;map-widget domain="mobility" station-types="CreativeIndustry"&gt;&lt;/map-widget&gt;
 
 &lt;!-- Show two types of stations --&gt;
-&lt;map-widget station-types="EChargingStation,EChargingPlug"&gt;&lt;/map-widget&gt;
+&lt;map-widget domain="mobility" station-types="EChargingStation,EChargingPlug"&gt;&lt;/map-widget&gt;
 
 &lt;!-- Show all stations with associated coordinates that are active --&gt;
-&lt;map-widget&gt;&lt;/map-widget&gt;
+&lt;map-widget domain="mobility"&gt;&lt;/map-widget&gt;
+
+&lt;!-- Show all activities/POIs retrieved from the Tourism API --&gt;
+&lt;map-widget domain="tourism"&gt;&lt;/map-widget&gt;
 
 &lt;!-- Show all stations with associated coordinates that are active (alternative) --&gt;
-&lt;map-widget station-types="*"&gt;&lt;/map-widget&gt;
+&lt;map-widget domain="mobility" station-types="*"&gt;&lt;/map-widget&gt;
 
 &lt;script src="[path to your scripts]/map_widget.js"&gt;&lt;/script&gt;</code>
         </pre>
