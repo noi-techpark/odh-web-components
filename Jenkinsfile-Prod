@@ -1,45 +1,26 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'docker/dockerfile-node'
-            additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
-        }
-    }
-    environment{
-       AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-       AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-    }
-    stages {
-	stage('test'){
-          steps {
-	    sh 'test -d mobility-echarging-display'
-            sh 'test -e mobility-echarging-display/README.md'
-          }
-        }
-	stage('Build'){
-          steps{
-             sh 'cd mobility-echarging-display && yarn'
-             sh 'cd mobility-echarging-display && lerna bootstrap'
-             sh 'cd mobility-echarging-display && yarn bc'
-          }
-        }
-	stage('Archive'){
-          steps{
-            sh 'cd public && mkdir -p scripts fonts'
-            sh 'cp ./mobility-echarging-display/dist/*.js public/scripts'
-            sh 'cp -r mobility-echarging-display/work/fonts/* public/fonts'
-          }
-        }
-	stage('index'){
-          steps{
-            sh "cd public/ && tree -I 'fonts|scripts' -T 'Available web-components' -d -H '.' -L 1 --noreport --charset utf-8 > index.html"
-          }
-        }
-	stage('Deploy'){
-          steps{
-            s3Delete(bucket: 'it.bz.odh.webcomponents.demo', path: '/')
-            s3Upload(bucket: 'it.bz.odh.webcomponents.demo', acl: 'PublicRead', file: 'public')
-          } 
-        }
-    }
+	agent {
+		dockerfile {
+			filename 'docker/dockerfile-node'
+			additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+		}
+	}
+	environment{
+		AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+		AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+	}
+	stages {
+		stage('Index') {
+			steps {
+				sh 'cd public && mkdir -p scripts fonts'
+				sh "cd public/ && tree -I 'fonts|scripts' -T 'Available web-components' -d -H '.' -L 1 --noreport --charset utf-8 > index.html"
+			}
+		}
+		stage('Deploy') {
+			steps {
+				s3Delete(bucket: 'it.bz.odh.webcomponents.demo', path: '/')
+				s3Upload(bucket: 'it.bz.odh.webcomponents.demo', acl: 'PublicRead', file: 'public')
+			}
+		}
+	}
 }
