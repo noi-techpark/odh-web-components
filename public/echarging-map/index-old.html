@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>E-Charging Map</title>
+    <title>Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-bundle.js"></script>
+    <link rel="stylesheet" href="../fonts/fonts.css" />
     <style>
       .widget-container {
         width: 90vw;
@@ -20,29 +21,45 @@
         margin-top: 1vh;
         margin-bottom: 4vh;
         border-radius: 8px;
-        overflow: auto;
+        overflow: scroll;
         width: calc(100% - 32px);
         position: relative;
+      }
+      @media only screen and (min-width: 678px) {
+        .widget-container {
+          width: 80vw;
+          margin: 0 auto;
+        }
+      }
+      @media only screen and (min-width: 1400px) {
+        .widget-container {
+          width: 70vw;
+          margin: 0 auto;
+        }
       }
     </style>
   </head>
   <body>
     <div class="widget-container">
-      <h2>E-Charging Map to access the Open Data Hub Mobility E-Charging Stations</h2>
+      <h2>Snippet</h2>
       <div class="code_snippet">
         <pre>
-<code>&lt;e-mobility-map-widget logo="https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png">&lt;/e-mobility-map-widget>
-&lt;script src="https://cdn.jsdelivr.net/gh/noi-techpark/webcomp-mobility-echarging-map@master/dist/map_widget.min.js">&lt;/script></code>
+	  <code>
+&lt;e-mobility-map-widget
+logo="https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"&gt;&lt;/e-mobility-map-widget&gt;
+&lt;script src="[path to your scripts]/map_widget.js"&gt;&lt;/script&gt;
+	  </code>
         </pre>
       </div>
     </div>
 
     <div class="widget-container">
-      <h2>E-Mobility</h2>
       <e-mobility-map-widget logo="https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"></e-mobility-map-widget>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/noi-techpark/webcomp-mobility-echarging-map@master/dist/map_widget.min.js"></script>
+    <div class="widget-container">
+    </div>
 
+    <script src="../scripts/map_widget.min.js"></script>
   </body>
 </html>
